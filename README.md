@@ -17,3 +17,8 @@ Alternatively use `npm run start`
 ## Development Notes
 
 For Installed Packages, see `package.json`
+
+Guide to using tailwindCSS with Node JS and EJS / Pug: https://daily.dev/blog/how-to-use-tailwindcss-with-node-js-express-and-pug#add-tailwindcss
+
+https://tailwindcss.com/docs/installation 
+
