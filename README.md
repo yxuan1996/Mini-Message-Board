@@ -51,6 +51,20 @@ https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
 Secrets are stored in a separate dotenv file in dropbox. 
 https://www.npmjs.com/package/dotenv
 
+### Capturing Form Data
+If you encounter errors on form data submission, check for the following:
+
+Ensure that you have defined the following middlewares
+```JS
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+```
+
+Ensure that you have provided the name and type attributes in the form inputs
+```HTML
+<input type="text" name='title' ... >
+```
+
 ### Database
 We will use Firestore as the main database for this app. Since Firestore is a Schemaless NoSQL database, we don't need to define a model, we can just create / read data from the controller. 
 

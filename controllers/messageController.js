@@ -1,4 +1,5 @@
 // const Message = require('../models/message');
+import db from '../firebase.js';
 
 
 const message_index = (req, res) => {

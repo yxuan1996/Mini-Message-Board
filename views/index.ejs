@@ -29,11 +29,10 @@
     <form method="POST" action="/new" class="modal-box flex flex-col gap-3" id="add_message_form">
       <h3 class="font-bold text-lg">Add New Message</h3>
       <p class="py-4">Press ESC key or click outside to close</p>
-      <input type="text" placeholder="Title" class="input input-bordered w-full max-w-xs" id="title" />
-      <input type="text" placeholder="Author" class="input input-bordered w-full max-w-xs" id="author"/>
-      <textarea class="textarea textarea-bordered w-full max-w-xs" placeholder="Bio" id="message"></textarea>
-      <button type="submit" class="btn btn-primary btn-outline w-24">Submit</button>
-      
+      <input type="text" name='title' placeholder="Title" class="input input-bordered w-full max-w-xs" id="title" />
+      <input type="text" name='author' placeholder="Author" class="input input-bordered w-full max-w-xs" id="author"/>
+      <textarea type='text' name='message' class="textarea textarea-bordered w-full max-w-xs" placeholder="Bio" id="message"></textarea>
+      <button type="submit" value="submit" class="btn btn-primary btn-outline w-24">Submit</button>
     </form>
     <form method="dialog" class="modal-backdrop">
       <button>close</button>
