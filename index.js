@@ -1,11 +1,15 @@
-const helmet = require("helmet");
-const morgan = require("morgan")
-const express = require('express');
-const path = require('path');
-const Routes = require('./routes/Routes');
+import express from "express";
+import helmet from "helmet";
+import morgan from "morgan";
+import path from 'path';
+import {fileURLToPath} from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import Routes from './routes/Routes.js';
 
 
-app = express();
+const app = express();
 
 app.set('view engine', 'ejs');
 

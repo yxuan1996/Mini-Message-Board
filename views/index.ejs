@@ -1,33 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="/styles/style.css" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="https://example.com/image.svg">
-    <title>Index Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Board</title>
+  <link rel="icon" type="image/svg+xml" href="https://example.com/image.svg">
+  <link href="/styles/style.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Hola</h1>
-    <div class="card card-compact w-96 bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary rounded-full border-rose-600">Buy Now</button>
-        </div>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <div class="header sticky top-0 z-50 navbar bg-primary text-primary-content">
+    <div class="flex-1">
+      <a class="btn btn-ghost normal-case text-xl">Mini Message Board</a>
+    </div>
+    <div class="flex-none">
+      <button class="btn btn-ghost flex flex-row" onclick="add_new_message.showModal()">
+        Add New Message
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Form for Adding New Message -->
+  <dialog id="add_new_message" class="modal">
+    <form method="POST" action="/new" class="modal-box flex flex-col gap-3" id="add_message_form">
+      <h3 class="font-bold text-lg">Add New Message</h3>
+      <p class="py-4">Press ESC key or click outside to close</p>
+      <input type="text" placeholder="Title" class="input input-bordered w-full max-w-xs" id="title" />
+      <input type="text" placeholder="Author" class="input input-bordered w-full max-w-xs" id="author"/>
+      <textarea class="textarea textarea-bordered w-full max-w-xs" placeholder="Bio" id="message"></textarea>
+      <button type="submit" class="btn btn-primary btn-outline w-24">Submit</button>
+      
+    </form>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
+
+
+  <div class="flex justify-center p-8">
+    <div class="grid gap-4 sm:w-full md:w-2/3 lg:w-1/2">
+      <!-- Card 1 -->
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <h3 class="text-xl font-semibold mb-2">Message Title 1</h3>
+        <p class="text-gray-600 mb-2">Author: John Doe</p>
+        <p class="text-gray-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
+        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
+        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+
+      <!-- Add more cards as needed -->
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
+        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
+        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
+        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
+        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
+        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
+        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
+        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
+        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
+        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
+        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
       </div>
     </div>
-    <!-- <div class="card card-compact w-96 bg-base-100 shadow-xl">
-        <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-        <div class="card-body">
-          <h2 class="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-    </div> -->
+  </div>
+
+
 </body>
 </html>
