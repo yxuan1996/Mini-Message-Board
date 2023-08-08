@@ -1,66 +1,57 @@
-// const Message = require('../models/message');
 import db from '../firebase.js';
+import { collection, addDoc, doc, getDocs, deleteDoc } from "firebase/firestore"; 
+import asyncHandler from "express-async-handler";
 
+const message_index = asyncHandler(async (req, res, next) => {
+  const result = await getDocs(collection(db, "messages"));
+  let response = [];
 
-const message_index = (req, res) => {
-  res.render('index', {  title: 'Message Board' });
-  // Message.find().sort({ createdAt: -1 })
-  //   .then(result => {
-  //     res.render('index', { messages: result, title: 'Message Board' });
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
-}
+  result.forEach(doc => {
+    let doc_object = doc.data();
+    doc_object['id'] = doc.id;
+    response.push(doc_object);
+  });
 
+  res.render('index', {  data: response })
+})
+
+// Find a single Document
+// Function not Used
 const message_details = (req, res) => {
   const id = req.params.id;
-  // Message.findById(id)
-  //   .then(result => {
-  //     res.render('details', { messages: result, title: 'Message Details' });
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
 }
 
+// Render Form Page
+// Function not used
 const message_create_get = (req, res) => {
   res.render('create', { title: 'New Message' });
 }
 
-const message_create_post = (req, res) => {
-  // try {
-  //   const docRef = await addDoc(collection(db, "users"), {
-  //     first: "Ada",
-  //     last: "Lovelace",
-  //     born: 1815
-  //   });
-  //   console.log("Document written with ID: ", docRef.id);
-  // } catch (e) {
-  //   console.error("Error adding document: ", e);
-  // }
-  // const message = new Message(req.body);
-  console.log(req.body);
-  res.redirect('/');
-  // // message.save()
-  //   .then(result => {
-  //     res.redirect('/');
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
-}
 
-const message_delete = (req, res) => {
+const message_create_post = asyncHandler(async (req, res, next) => {
+  console.log(req.body);
+  try {
+    const docRef = await addDoc(collection(db, "messages"), {
+      title: req.body.title,
+      author: req.body.author,
+      message: req.body.message
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }  
+  res.redirect('/');
+})
+
+const message_delete = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
-  // Message.findByIdAndDelete(id)
-  //   .then(result => {
-  //     res.json({ redirect: '/' });
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
-}
+  console.log(id);
+
+  await deleteDoc(doc(db, "messages", id));
+
+  res.json({ redirect: '/' });
+
+})
 
 
 export default {

@@ -51,6 +51,13 @@ https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
 Secrets are stored in a separate dotenv file in dropbox. 
 https://www.npmjs.com/package/dotenv
 
+### Async functions
+Added support for async /await functions in the controller. 
+
+```
+npm install express-async-handler
+```
+
 ### Capturing Form Data
 If you encounter errors on form data submission, check for the following:
 

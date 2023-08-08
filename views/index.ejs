@@ -12,7 +12,7 @@
   <!-- Navbar -->
   <div class="header sticky top-0 z-50 navbar bg-primary text-primary-content">
     <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl">Mini Message Board</a>
+      <a href="/" class="btn btn-ghost normal-case text-xl">Mini Message Board</a>
     </div>
     <div class="flex-none">
       <button class="btn btn-ghost flex flex-row" onclick="add_new_message.showModal()">
@@ -31,7 +31,7 @@
       <p class="py-4">Press ESC key or click outside to close</p>
       <input type="text" name='title' placeholder="Title" class="input input-bordered w-full max-w-xs" id="title" />
       <input type="text" name='author' placeholder="Author" class="input input-bordered w-full max-w-xs" id="author"/>
-      <textarea type='text' name='message' class="textarea textarea-bordered w-full max-w-xs" placeholder="Bio" id="message"></textarea>
+      <textarea type='text' name='message' class="textarea textarea-bordered w-full max-w-xs" placeholder="Type your message here" id="message"></textarea>
       <button type="submit" value="submit" class="btn btn-primary btn-outline w-24">Submit</button>
     </form>
     <form method="dialog" class="modal-backdrop">
@@ -42,48 +42,59 @@
 
   <div class="flex justify-center p-8">
     <div class="grid gap-4 sm:w-full md:w-2/3 lg:w-1/2">
-      <!-- Card 1 -->
+      <!-- Iterate and display data here -->
+      <% if (data.length > 0) { %>
+      <% data.forEach(messageItem => { %>
+        <div class="bg-white p-4 shadow-md rounded-lg flex ">
+          <div class="flex-1">
+            <h3 class="text-xl font-semibold mb-2"><%= messageItem.title %></h3>
+            <p class="text-gray-600 mb-2">Author: <%= messageItem.author %></p>
+            <p class="text-gray-800"><%= messageItem.message %></p>
+          </div>
+
+          <button class="delete btn btn-square btn-outline flex-none" data-doc="<%= messageItem.id %>">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+
+        </div>
+      <% }) %>
+      <% } else { %>
+        <p>There are no messages to display... Create one now!</p>
+      <% } %>
+
+
+      <!-- Sample Card 1 -->
       <div class="bg-white p-4 shadow-md rounded-lg">
         <h3 class="text-xl font-semibold mb-2">Message Title 1</h3>
         <p class="text-gray-600 mb-2">Author: John Doe</p>
         <p class="text-gray-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
 
-      <!-- Card 2 -->
+      <!-- Sample Card 2 -->
       <div class="bg-white p-4 shadow-md rounded-lg">
         <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
         <p class="text-gray-600 mb-2">Author: Jane Smith</p>
         <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
       </div>
 
-      <!-- Add more cards as needed -->
-      <div class="bg-white p-4 shadow-md rounded-lg">
-        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
-        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
-        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-      </div>
-      <div class="bg-white p-4 shadow-md rounded-lg">
-        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
-        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
-        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-      </div>
-      <div class="bg-white p-4 shadow-md rounded-lg">
-        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
-        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
-        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-      </div>
-      <div class="bg-white p-4 shadow-md rounded-lg">
-        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
-        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
-        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-      </div>
-      <div class="bg-white p-4 shadow-md rounded-lg">
-        <h3 class="text-xl font-semibold mb-2">Message Title 2</h3>
-        <p class="text-gray-600 mb-2">Author: Jane Smith</p>
-        <p class="text-gray-800">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-      </div>
     </div>
   </div>
+
+  <script>
+    const trashcan = document.querySelector('button.delete');
+
+    trashcan.addEventListener('click', (e) => {
+      const endpoint = `/${trashcan.dataset.doc}`;
+
+      fetch(endpoint, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => window.location.href = data.redirect)
+      .catch(err => console.log(err));
+    });
+    
+  </script>
 
 
 </body>
