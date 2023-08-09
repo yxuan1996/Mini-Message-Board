@@ -5,12 +5,20 @@ import asyncHandler from "express-async-handler";
 const message_index = asyncHandler(async (req, res, next) => {
   const result = await getDocs(collection(db, "messages"));
   let response = [];
+  let count = 0;
 
   result.forEach(doc => {
+    count += 1;
     let doc_object = doc.data();
     doc_object['id'] = doc.id;
     response.push(doc_object);
   });
+
+  // if more than 25 messages, we delete the oldest message
+  if (count > 25) {
+    let itemforDeletion = response.pop();
+    await deleteDoc(doc(db, "messages", itemforDeletion.id));
+  };
 
   res.render('index', {  data: response })
 })

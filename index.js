@@ -2,6 +2,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from 'cors';
+import favicon from 'serve-favicon'
 import path from 'path';
 import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -11,6 +12,8 @@ import Routes from './routes/Routes.js';
 
 
 const app = express();
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 app.set('view engine', 'ejs');
 

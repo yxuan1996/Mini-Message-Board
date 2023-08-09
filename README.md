@@ -75,3 +75,24 @@ Ensure that you have provided the name and type attributes in the form inputs
 ### Database
 We will use Firestore as the main database for this app. Since Firestore is a Schemaless NoSQL database, we don't need to define a model, we can just create / read data from the controller. 
 
+### Hosting
+We will be hosting our Node app on `render.com`
+
+### Security
+To enhance app security and prevent spam, the following implementations have been considered:
+
+- Limit Database writes to a particular IP Address (Firewall). Unfortunately Firebase does not support this feature. 
+- Use Firebase AppCheck (Recaptcha V3) to prevent bots. Not implemented due to privacy and user experience concerns. 
+https://makerkit.dev/blog/tutorials/secure-firebase-appcheck
+
+- Setting Firestore Security Rules (Completed)
+https://fireship.io/snippets/firestore-rules-recipes/
+
+- Rate limiting
+https://fireship.io/lessons/how-to-rate-limit-writes-firestore/
+
+https://www.npmjs.com/package/express-rate-limit
+
+- Limit Message Storage
+Every time the number of messages reaches more than 25, we delete the oldest message
+
